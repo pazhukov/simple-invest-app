@@ -16,10 +16,11 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var config_name = "db.config"
+var config_name = "empty.db"
 var pathToConfig string
 var database *sql.DB
 var exPath string
+var comm_broker_tx int
 
 var version = "0.01"
 
@@ -763,7 +764,7 @@ func createTxDeal(id int) error {
 		error_info = err
 	}
 
-	if error_info == nil && deal.Broker_Comm > 0 {
+	if error_info == nil && deal.Broker_Comm > 0 && comm_broker_tx == 1 {
 		_, err = database.Exec("insert into money_transactions (date_tx, curr, portfolio, amount, deal_id, comment) values (?, ?, ?, ?, ?, ?)", deal.Date_ex, deal.Price_Currency, deal.Portfolio, deal.Broker_Comm*-1, id, "Money move by broker commission")
 		if err != nil {
 			error_info = err
@@ -3363,21 +3364,22 @@ func main() {
 
 	database = db
 
-	Settings, err := getSettings()
+	app_settings, err := getSettings()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if Settings.WorkDir == "" {
+	if app_settings.WorkDir == "" {
 		log.Fatal("Setting 'Work directory' is empty - can't start app. Use 'firts_start' for filling settings!")
 	}
 
-	if Settings.Port == "" {
+	if app_settings.Port == "" {
 		log.Fatal("Setting 'Port' is empty - can't start app. Use 'firts_start' for filling settings!")
 	}
 
-	exPath = Settings.WorkDir
-	listen_host := ":" + Settings.Port
+	exPath = app_settings.WorkDir
+	listen_host := ":" + app_settings.Port
+	comm_broker_tx = app_settings.BrokerCommInDeal
 
 	fmt.Println("")
 	fmt.Println("███████ ██ ███    ███ ██████  ██      ███████     ██ ███    ██ ██    ██ ███████ ███████ ████████")
