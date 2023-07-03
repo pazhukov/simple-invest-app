@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Quotes</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Simple Invest - {{.AssetName}} Quotes</h1>
+        <div class="center"> 
+			<input type="text" name="Asset_ID" value="{{.Asset}}" hidden />
+			<div class="right_text"><a href="/quote_add/{{.Asset}}">Add new quotes</a> <a href="/assets">Back</a></div>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <table style="width:100%">
+                <thead>
+                    <th>Date</th>
+                    <th>Currency</th>
+                    <th>Open</th>
+                    <th>Max</th>
+					<th>Min</th>
+					<th>Close</th>
+					<th>Acc Int</th>
+					<th>Operations</th>
+                </thead>
+                {{range .List }}
+                <tr>
+                    <td style="text-align:center">{{.DateQuotes}}</td>
+                    <td style="text-align:center">{{.Currency}}</td>
+                    <td style="text-align:center">{{.Open}}</td>
+					<td style="text-align:center">{{.Max}}</td>
+					<td style="text-align:center">{{.Min}}</td>
+					<td style="text-align:center">{{.Close}}</td>
+					<td style="text-align:center">{{.AccInt}}</td>
+                    <td style="text-align:center"><a href="/quote_edit/{{.Id}}">Change</a> | <a href="/quote_delete/{{.Id}}">Delete</a></td>
+                </tr>
+                {{end}}
+            </table>
+        </div>  		
+    </body>
+</html>

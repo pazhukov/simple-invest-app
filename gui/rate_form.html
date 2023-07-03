@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Rates</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+		<h1 style="text-align:center">Rates</h1>
+        <div class="center">
+            <h3>Edit Rate for {{.Currency}}</h3>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <form method="POST" style="text-align:left">
+				{{ if (gt .Id 0) }} 
+				<label>Rate ID</label><br>
+				<input type="text" name="Rate_id" value="{{.Id}}" readonly ><br><br>
+				{{ end }}
+                <label>Date</label><br>
+                <input type="date" name="Rate_date" value="{{.DateRate}}" ><br><br>  			
+                <label>Currency</label><br>
+				{{$curr  := .Currency}}
+				<select name = "Rate_curr">
+				{{range .Currencies}}
+						{{ if eq .Name $curr }}<option value="{{.Name}}" selected="selected">{{.Name}}</option>{{ end }}
+				{{end}}							
+                </select><br><br>
+                <label>Rate</label><br>
+                <input type="number" name="Rate_value" value="{{.Rate}}" step="0.0001" /><br><br>					
+                <input type="submit" value="Save" />
+            </form>
+			<p style="right_text"><a href="/rates/{{.Name}}">Cancel</a></p>
+		</div> 		
+    </body>
+</html>

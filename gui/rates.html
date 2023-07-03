@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Rates</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Simple Invest - {{.Currency}} Rates</h1>
+        <div class="center"> 
+			<div class="right_text"><a href="/rate_add/{{.Currency}}">Add new rate</a> <a href="/currencies">Back</a></div>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <table style="width:100%">
+                <thead>
+                    <th>Date</th>
+                    <th>Rate</th>
+					<th>Operations</th>
+                </thead>
+                {{range .List }}
+                <tr>
+                    <td style="text-align:center">{{.DateRate}}</td>
+                    <td style="text-align:center">{{.Rate}}</td>
+                    <td style="text-align:center"><a href="/rate_edit/{{.Id}}">Change</a> | <a href="/rate_delete/{{.Id}}">Delete</a></td>
+                </tr>
+                {{end}}
+            </table>
+        </div>  		
+    </body>
+</html>

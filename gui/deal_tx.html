@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Deals</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Deals Tx</h1>
+        <div class="center"> 
+			<p style="color:red;">{{.ErrorMsg}}</p>
+			<div class="right_text"><a href="/deals">Back</a> <a href="/tx_add/{{.Id}}">Create Tx<a> <a href="/tx_remove/{{.Id}}">Remove Tx<a></div>
+			<h2>Asset transaction</h2>
+            <table style="width:100%">
+                <thead>
+                    <th>Date</th>
+                    <th>Asset</th>
+					<th>Portfolio</th>
+					<th>Qty</th>
+					<th>Comment</th>
+                </thead>
+                {{range .Asset }}
+                <tr>
+                    <td style="text-align:center">{{.DateTx}}</td>
+					<td style="text-align:center">{{.AssetName}}</td>
+					<td style="text-align:center">{{.PortfolioName}}</td>
+					<td style="text-align:center">{{.Qty}}</td>
+					<td style="text-align:center">{{.Comment}}</td>
+                </tr>
+                {{end}}
+            </table>
+			<h2>Money transaction</h2>
+            <table style="width:100%">
+                <thead>
+                    <th>Date</th>
+					<th>Portfolio</th>
+					<th>Currency</th>
+					<th>Amount</th>
+					<th>Comment</th>
+                </thead>
+                {{range .Money }}
+                <tr>
+                    <td style="text-align:center">{{.DateTx}}</td>
+					<td style="text-align:center">{{.PortfolioName}}</td>
+					<td style="text-align:center">{{.Currency}}</td>
+					<td style="text-align:center">{{.Amount}}</td>
+					<td style="text-align:center">{{.Comment}}</td>
+                </tr>
+                {{end}}
+            </table>		
+        </div>  		
+    </body>
+</html>

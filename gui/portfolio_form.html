@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Portfolios</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Portfolios</h1>
+        <div class="center">
+            <h3>Edit portfolio</h3>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <form method="POST" style="text-align:left">
+				{{ if (gt .Id 0) }}
+                <label>ID</label><br>
+                <input type="text" name="Portfolio_id" value="{{.Id}}" readonly /><br><br>			
+				{{ end }}
+                <label>Name</label><br>
+                <input type="text" name="Portfolio_name" value="{{.Name}}" /><br><br>
+                <label>Broker</label><br>
+                <input type="text" name="Portfolio_broker" value="{{.Broker}}" /><br><br>             
+                <input type="submit" value="Save" />
+            </form>
+			<p style="right_text"><a href="/portfolios">Cancel</a></p>
+        </div> 	       
+    </body>
+</html>

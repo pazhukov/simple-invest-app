@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Simple Invest - Settings</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Settings</h1>
+        <div class="center">
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <form method="POST" style="text-align:left">
+                <label>Work Directory</label><br>
+                <input type="text" name="workdir" value="{{.WorkDir}}"/><br><br>
+                <label>Port</label><br>
+                <input type="text" name="port" value="{{.Port}}"/><br><br>
+                <label>Count Broker commission in Deal</label><br>
+				<select name="comm_in_deal">
+					{{ if eq .BrokerCommInDeal 0 }}
+                    <option value="0" >No</option>
+                    <option value="1">Yes</option>
+					{{ end }}
+					{{ if eq .BrokerCommInDeal 1 }}
+                    <option value="0" >No</option>
+                    <option value="1" selected>Yes</option>
+					{{ end }}					
+				</select><br><br>			
+                <input type="submit" value="Save" />
+            </form>
+			<p style="right_text"><a href="/">Cancel</a></p>
+        </div> 		
+    </body>
+</html>

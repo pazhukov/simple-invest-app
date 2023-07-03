@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Balance</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }       
+    </style>
+    <body>
+        <h1 style="text-align:center">Simple Invest - Reports</h1>
+        <div class="center"> 
+            <div class="center_top"><a href="/">Home</a> <a href="/report_balance">Balance On Date</a></div>
+			
+			<form method="POST" style="text-align:left">
+				Report date: <input type="date" name="date_report" value="{{.OnDate}}"><input type="submit" value="Get" />
+			</form>
+			<h2>Asset Balance</h2>
+			<table style="width:100%">
+				<thead>
+					<th>Portfolio</th>
+					<th>Asset</th>
+					<th>Qty</th>
+					<th>Currency</th>
+					<th>Amount</th>
+					<th>Market Value</th>
+					<th>PnL</th>
+				</thead>
+				{{range .Asset }}
+				<tr>
+					<td style="text-align:center">{{.PortfolioName}}</td>
+					<td style="text-align:center">{{.AssetName}}</td>
+					<td style="text-align:center">{{.Qty}}</td>
+					<td style="text-align:center">{{.Currency}}</td>
+					<td style="text-align:center">{{.Amount}}</td>
+					<td style="text-align:center">{{.MarketValue}}</td>
+					<td style="text-align:center">{{.PnL}}</td>				
+				</tr>
+				{{end}}
+			</table>
+			<h2>Money Balance</h2>
+			<table style="width:100%">
+				<thead>
+					<th>Portfolio</th>
+					<th>Currency</th>
+					<th>Amount</th>
+					<th>Market Value</th>
+					<th>PnL</th>
+				</thead>
+				{{range .Money }}
+				<tr>
+					<td style="text-align:center">{{.PortfolioName}}</td>
+					<td style="text-align:center">{{.Currency}}</td>
+					<td style="text-align:center">{{.Amount}}</td>
+					<td style="text-align:center">{{.MarketValue}}</td>
+					<td style="text-align:center">{{.PnL}}</td>
+				</tr>
+				{{end}}
+			</table>			
+        </div>            
+
+			
+    </body>
+</html>

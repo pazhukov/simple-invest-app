@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Assets</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Assets</h1>
+        <div class="center">
+            <h3>Edit asset</h3>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <form method="POST" style="text-align:left">
+				{{ if (gt .Id 0) }}
+                <label>ID</label><br>
+                <input type="text" name="Asset_id" readonly value="{{.Id}}" /><br><br>			
+				{{ end }}
+                <label>Name</label><br>
+                <input type="text" name="Asset_name" value="{{.Name}}" /><br><br>
+                <label>Gov Reg Number</label><br>
+                <input type="text" name="Asset_grn_code" value="{{.Grn_code}}" /><br><br>  
+                <label>ISIN</label><br>
+                <input type="text" name="Asset_isin" value="{{.ISIN}}" /><br><br> 
+                <label>Type</label><br>
+                <select name="Asset_type">
+                    {{ if eq .Type 0 }}
+						<option value="0" selected >share</option>
+						<option value="1">bond</option>
+						<option value="2">unit</option>
+						<option value="3">DR</option>
+					{{ end }}
+                    {{ if eq .Type 1}}
+						<option value="0">share</option>
+						<option value="1" selected >bond</option>
+						<option value="2">unit</option>
+						<option value="3">DR</option>
+					{{ end }}
+                    {{ if eq .Type 2}}
+						<option value="0">share</option>
+						<option value="1">bond</option>
+						<option value="2" selected >unit</option>
+						<option value="3">DR</option>	
+					{{ end }}	
+                    {{ if eq .Type 3}}
+						<option value="0">share</option>
+						<option value="1">bond</option>
+						<option value="2">unit</option>
+						<option value="3" selected >DR</option>	
+					{{ end }}					
+                </select><br><br>    				
+                <label>Ticker</label><br>
+                <input type="text" name="Asset_ticker" value="{{.Ticker}}" /><br><br>  
+				{{$curr  := .Currency}}
+                <label>Currency</label><br>
+				<select name = "Asset_currency">
+				{{range .Currencies}}
+						<option value="{{.Name}}" {{ if eq .Name $curr }}selected="selected"{{ end }}>{{.Name}}</option>
+				{{end}}
+                </select><br><br>			  
+                <input type="submit" value="Save" />
+            </form>
+			<p style="right_text"><a href="/assets">Cancel</a></p>
+        </div> 	       
+    </body>
+</html>

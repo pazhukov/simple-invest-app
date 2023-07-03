@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Deals page</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Simple Invest - Deals</h1>
+        <div class="center"> 
+            <div class="center_top"><a href="/">Home</a> <a href="catalogs">Catalogs</a> <a href="deals">Deals</a> <a href="reports">Reports</a></div>
+			<div class="right_text"><a href="/deal_add">Add new trade<a></div>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <table style="width:100%">
+                <thead>
+                    <th>Number</th>
+                    <th>Date</th>
+                    <th>Date Ex</th>
+                    <th>Asset</th>
+					<th>Direction</th>
+					<th>Qty</th>
+					<th>Amount</th>
+					<th>Broker Comm</th>
+					<th>Portfolio</th>
+					<th>Operation</th>
+                </thead>
+                {{range .List }}
+                <tr>
+                    <td style="text-align:center">{{.Number}}</td>
+                    <td style="text-align:center">{{.Date}}</td>
+                    <td style="text-align:center">{{.Date_ex}}</td>
+					<td style="text-align:center">{{.AssetName}}</td>
+					<td style="text-align:center">{{.Direction}}</td>
+					<td style="text-align:center">{{.Qty}}</td>
+					<td style="text-align:center">{{.Amount}} {{.Price_Currency}}</td>
+					<td style="text-align:center">{{.Broker_Comm}} {{.Broker_Comm_Currency}}</td>
+					<td style="text-align:center">{{.Portfolio_Name}}</td>
+                    <td style="text-align:center"><a href="/deal_edit/{{.Id}}">Change</a> <a href="/deal_tx/{{.Id}}">Tx</a> | <a href="/deal_delete/{{.Id}}">Delete</a></td>
+                </tr>
+                {{end}}
+            </table>
+        </div>  		
+    </body>
+</html>

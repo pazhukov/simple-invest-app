@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Assets</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Simple Invest - Assets</h1>
+        <div class="center">
+            <h3>New asset</h3>
+            <form method="POST" style="text-align:left">
+                <label>Name</label><br>
+                <input type="text" name="Asset_name"/><br><br>
+                <label>Gov Reg Number</label><br>
+                <input type="text" name="Asset_grn_code" /><br><br>  
+                <label>ISIN</label><br>
+                <input type="text" name="Asset_isin" /><br><br> 
+                <label>Type</label><br>
+                <select name="Asset_type">
+                    <option value="0">share</option>
+                    <option value="1">bond</option>
+					<option value="2">unit</option>
+					<option value="3">DR</option>
+                </select><br><br>    				
+                <label>Ticker</label><br>
+                <input type="text" name="Asset_ticker" /><br><br>  
+                <label>Currency</label><br>
+                <input type="text" name="Asset_currency" /><br><br>  
+                <input type="submit" value="New asset" />
+                <input type="button" onclick="history.back();" value="Cancel">
+            </form>
+        </div> 		
+    </body>
+</html>

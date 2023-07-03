@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Simple Invest - In-Out</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Money In-Out</h1>
+        <div class="center">
+            <h3>Edit In-Out</h3>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <form method="POST" style="text-align:left">
+				{{ if (gt .Id 0) }}
+				<label>ID</label><br>
+                <input type="text" name="InOut_id" value="{{.Id}}" readonly /><br><br>			
+				{{ end }}
+                <label>Date Exec</label><br>
+                <input type="date" name="InOut_date_exec" value="{{.DateTx}}"><br><br>  				
+                 <label>Amount</label><br>
+                <input type="number" name="InOut_amount" step="0.01" value="{{.Amount}}" /><br><br> 
+                <label>Currency</label><br>
+				{{$curr  := .Currency}}
+				<select name = "InOut_curr">
+				{{range .Currencies}}
+						<option value="{{.Name}}" {{if eq .Name $curr}}selected="selected"{{ end }}>{{.Name}}</option>
+				{{end}}
+                </select><br><br> 
+                <label>Portfolio</label><br>
+				{{$portfolio  := .Portfolio}}
+				<select name = "InOut_portfolio">
+				{{range .Portfolios}}
+						<option value="{{.Id}}" {{ if eq .Id $portfolio }}selected="selected"{{ end }}>{{.Name}}</option>
+				{{end}}
+                </select><br><br>
+				<label>Comment</label><br>
+				<input type="text" name="InOut_comment" value="{{.Comment}}" /><br><br>				
+                <input type="submit" value="Save In-Out" />
+            </form>
+			<p style="right_text"><a href="/money_in_out">Cancel</a></p>
+        </div> 		
+    </body>
+</html>

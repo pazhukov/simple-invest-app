@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Catalogs page</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Simple Invest - Currencies</h1>
+        <div class="center"> 
+            <div class="center_top"><a href="/">Home</a> <a href="/assets">Assets</a> <a href="/currencies">Currencies</a> <a href="/portfolios">Portfolios</a></div>
+			<div class="right_text"><a href="/cur_add">Add new currency<a></div>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <table style="width:100%">
+                <thead>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Is Metal</th>
+                    <th>Operation</th>
+                </thead>
+                {{range .List }}
+                <tr>
+                    <td style="text-align:center">{{.Code}}</td>
+                    <td style="text-align:center">{{.Name}}</td>
+                    <td style="text-align:center">{{.IsMetal}}</td>
+                    <td style="text-align:center"><a href="/cur_edit/{{.Code}}">Change</a> <a href="/rates/{{.Name}}">Rates</a> | <a href="/cur_delete/{{.Code}}">Delete</a></td>
+                </tr>
+                {{end}}
+            </table>
+        </div>  		
+    </body>
+</html>

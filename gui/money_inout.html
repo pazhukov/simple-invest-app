@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - In-Out page</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+        <h1 style="text-align:center">Simple Invest - Money In-Out</h1>
+        <div class="center"> 
+            <div class="center_top"><a href="/">Home</a> <a href="money_in_out">Money In-Out</a> <a href="asset_in_out">Asset In-Out</a></div>
+			<div class="right_text"><a href="/money_in_out_add">Add new In-Out<a></div>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <table style="width:100%">
+                <thead>
+                    <th>ID</th>
+                    <th>Date Ex</th>
+					<th>Portfolio</th>
+					<th>Amount</th>
+					<th>Comment</th>
+					<th>Operation</th>
+                </thead>
+                {{range .List }}
+                <tr>
+                    <td style="text-align:center">{{.Id}}</td>
+                    <td style="text-align:center">{{.DateTx}}</td>
+                    <td style="text-align:center">{{.PortfolioName}}</td>
+					<td style="text-align:center">{{.Amount}} {{.Currency}}</td>
+					<td style="text-align:center">{{.Comment}}</td>
+                    <td style="text-align:center"><a href="/money_in_out_edit/{{.Id}}">Change</a> | <a href="/money_in_out_delete/{{.Id}}">Delete</a></td>
+                </tr>
+                {{end}}
+            </table>
+        </div>  		
+    </body>
+</html>

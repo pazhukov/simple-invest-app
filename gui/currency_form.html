@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Currencies</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }  
+    </style>
+    <body>
+        <h1 style="text-align:center">Currencies</h1>
+        <div class="center">
+            <h3>Edit currency</h3>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <form method="POST" style="text-align:left">
+                <label>Code</label><br>
+                <input type="text" name="Cur_code" maxlength="3" value="{{.Code}}" /><br><br>
+                <label>Name</label><br>
+                <input type="text" name="Cur_name" maxlength="3" value="{{.Name}}" /><br><br>
+                <label>Is metal</label><br>
+                <select name="Is_metal">
+                    {{ if eq .IsMetal 0 }}
+                        <option value="0" selected>No</option>
+                        <option value="1">Yes</option>
+                    {{ else }}
+                        <option value="0">No</option>
+                        <option value="1" selected>Yes</option>
+                    {{ end }}								
+                </select><br><br>                
+                <input type="submit" value="Save" />
+            </form>
+			<p style="right_text"><a href="/currencies">Cancel</a></p>
+        </div> 	       
+    </body>
+</html>

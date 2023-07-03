@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta http-equiv="Cache-control" content="no-cache">
+        <title>Simple Invest - Quotes</title>
+    </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+        .right_text {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+			text-align: right;
+        }		
+        .center_top {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }        
+    </style>
+    <body>
+		<h1 style="text-align:center">Quotes</h1>
+        <div class="center">
+            <h3>Edit Quotes for {{.AssetName}}</h3>
+			<p style="color:red;">{{.ErrorMsg}}</p>
+            <form method="POST" style="text-align:left">
+				{{ if (gt .Id 0) }}
+				<label>Quote ID</label><br>
+				<input type="text" name="Quote_id" value="{{.Id}}" readonly ><br><br>
+				{{ end }}
+                <label>Date</label><br>
+                <input type="date" name="Quote_date" value="{{.DateQuotes}}" ><br><br>  			
+                <label>Asset</label><br>
+				{{$asset  := .Asset}}
+				<select name = "Quote_asset">
+				{{range .Assets}}
+						{{ if eq .Id $asset }}<option value="{{.Id}}" selected="selected">{{.Name}}</option>{{ end }}
+				{{end}}
+                </select><br><br> 
+                <label>Currency</label><br>
+				{{$curr  := .Currency}}
+				<select name = "Quote_curr">
+				{{range .Currencies}}
+						<option value="{{.Name}}" {{ if eq .Name $curr }}selected="selected"{{ end }}>{{.Name}}</option>
+				{{end}}
+                </select><br><br> 
+                <label>Open</label><br>
+                <input type="number" name="Quote_open" step="0.000001" value="{{.Open}}" /><br><br> 	
+                <label>Max</label><br>
+                <input type="number" name="Quote_max" step="0.000001" value="{{.Max}}" /><br><br>
+                <label>Min</label><br>
+                <input type="number" name="Quote_min" step="0.000001" value="{{.Min}}" /><br><br>
+                <label>Close</label><br>
+                <input type="number" name="Quote_close" step="0.000001" value="{{.Close}}" /><br><br>				
+                <label>Acc Int</label><br>
+                <input type="number" name="Quote_accint" step="0.000001" value="{{.AccInt}}" /><br><br>					
+                </select>			
+                <input type="submit" value="Save" />
+            </form>
+			<p style="right_text"><a href="/quotes/{{.Asset}}">Cancel</a></p>
+        </div> 		
+    </body>
+</html>
